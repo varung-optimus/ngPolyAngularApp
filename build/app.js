@@ -421,7 +421,7 @@ angular.module('app.home', ['ui.router'])
             views: {
                 "content@app": {
                     templateUrl: 'app/home/views/home.html',
-                    controller: 'HomeController'
+                    controller: 'HomeController as datatables'
                 }
             }
         })
@@ -1244,10 +1244,31 @@ angular.module('app').controller('TodoCtrl', function ($scope, $timeout, Todo) {
 });
 'use strict';
 
-angular.module('app.home').controller('HomeController', function ($scope) {
+angular.module('app.home').controller('HomeController', function ($scope, DTOptionsBuilder, DTColumnBuilder) {
 
+    this.standardOptions = DTOptionsBuilder
+        .fromSource('api/tables/datatables.standard.json')
+         //Add Bootstrap compatibility
+        .withDOM("<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
+            "t" +
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>")
+        .withBootstrap();
+    this.standardColumns = [
+        DTColumnBuilder.newColumn('id').withClass('text-danger'),
+        DTColumnBuilder.newColumn('name')
+    ];
+
+    this.selectItem = function(item) {
+        alert(item.name);
+    };
+
+    angular.element(document.querySelector('#dt-grid')).on('click', function(item) {
+        alert(item);
+        // Do processing here to display the other grid
+    });
 
 });
+
 "use strict";
 
 angular.module('app').controller("LanguagesCtrl",  function LanguagesCtrl($scope, $rootScope, $log, Language){
@@ -2490,7 +2511,6 @@ angular.module('app.tables').directive('datatableBasic', function ($compile) {
                 var childFormatTemplate = childFormat.remove().html();
                 element.on('click', childFormat.data('childControl'), function () {
                     var tr = $(this).closest('tr');
-
                     var row = _dataTable.row( tr );
                     if ( row.child.isShown() ) {
                         // This row is already open - close it
@@ -2527,6 +2547,7 @@ angular.module('app.tables').directive('datatableBasic', function ($compile) {
         }
     }
 });
+
 'use strict';
 
 angular.module('app.tables').directive('datatableColumnFilter', function () {
@@ -2600,6 +2621,7 @@ angular.module('app.tables').directive('datatableColumnFilter', function () {
         }
     }
 });
+
 'use strict';
 
 angular.module('app.tables').directive('datatableColumnReorder', function () {
@@ -2653,6 +2675,7 @@ angular.module('app.tables').directive('datatableColumnReorder', function () {
         }
     }
 });
+
 'use strict';
 
 angular.module('app.tables').directive('datatableTableTools', function () {
@@ -2727,6 +2750,7 @@ angular.module('app.tables').directive('datatableTableTools', function () {
         }
     }
 });
+
 'use strict';
 
 angular.module('app.tables').directive('jqGrid', function ($compile) {

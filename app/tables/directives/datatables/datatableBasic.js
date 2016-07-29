@@ -61,7 +61,6 @@ angular.module('app.tables').directive('datatableBasic', function ($compile) {
                 var childFormatTemplate = childFormat.remove().html();
                 element.on('click', childFormat.data('childControl'), function () {
                     var tr = $(this).closest('tr');
-
                     var row = _dataTable.row( tr );
                     if ( row.child.isShown() ) {
                         // This row is already open - close it
