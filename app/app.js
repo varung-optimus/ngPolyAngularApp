@@ -22,20 +22,20 @@ angular.module('app', [
     // App
     'app.auth',
     'app.layout',
-    //'app.chat',
-    //'app.dashboard',
-    //'app.calendar',
-    //'app.inbox',
-    //'app.graphs',
-    //'app.tables',
-    //'app.forms',
-    //'app.ui',
-    //'app.widgets',
-    //'app.maps',
-    //'app.appViews',
-    //'app.misc',
-    //'app.smartAdmin',
-    //'app.eCommerce'
+    'app.chat',
+    'app.dashboard',
+    'app.calendar',
+    'app.inbox',
+    'app.graphs',
+    'app.tables',
+    'app.forms',
+    'app.ui',
+    'app.widgets',
+    'app.maps',
+    'app.appViews',
+    'app.misc',
+    'app.smartAdmin',
+    'app.eCommerce',
     'app.home'
 ])
 .config(function ($provide, $httpProvider, RestangularProvider) {
@@ -92,5 +92,3 @@ angular.module('app', [
     // editableOptions.theme = 'bs3';
 
 });
-
-
